@@ -2,19 +2,11 @@ import { Router } from "express";
 
 import PostModel from "../models/Post";
 import { FailureResponseMessage, PostRequestHandler } from "../types";
-import { isEveryFieldExist, isValidId } from "./utils";
-
-const validateId: PostRequestHandler = (req, res, next) =>
-  isValidId(req.params.id)
-    ? next()
-    : res.status(400).json({
-        message: FailureResponseMessage.INVALID_ID,
-      });
+import { isEveryFieldExist, validateId } from "./utils";
 
 const create: PostRequestHandler = async (req, res) => {
   const { title, content } = req.body;
   if (!isEveryFieldExist(title, content)) {
-    title;
     return res
       .status(400)
       .json({ message: FailureResponseMessage.MISSING_PARAMS });
