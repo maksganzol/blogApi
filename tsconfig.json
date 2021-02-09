@@ -1,0 +1,12 @@
+{
+    "exclude": ["node_modules/*"],
+    "compilerOptions": {
+      "outDir": "out",
+      "target": "es6",
+      "module": "commonjs",
+      "strict": true,                           
+      "moduleResolution": "node",            
+      "allowSyntheticDefaultImports": true,  
+      "esModuleInterop": true,                   
+    }
+  }
