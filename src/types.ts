@@ -1,5 +1,5 @@
-import { RequestHandler } from "express";
-import { Document } from "mongoose";
+import type { RequestHandler } from "express";
+import type { Document } from "mongoose";
 
 export type Post = {
   title: string;
