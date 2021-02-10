@@ -96,10 +96,15 @@ const remove: PostRequestHandler = async ({ params }, res) => {
 };
 
 const list: RequestHandler<any, { title: string; id: string }[]> = async (
-  _,
+  req,
   res
 ) => {
-  const posts = await PostModel.find({});
+  const limit = 5;
+  const page = Number(req.query.page || 0);
+  const posts = await PostModel.find({}, "title", {
+    skip: page * limit,
+    limit,
+  });
 
   return res.json(posts.map(({ title, _id }) => ({ title, id: _id })));
 };
