@@ -1,4 +1,5 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, Document } from "mongoose";
+import { Comment } from "../types";
 
 const schema = new Schema({
   content: {
@@ -14,6 +15,11 @@ const schema = new Schema({
     required: true,
     enum: ["Comment", "Post"],
   },
+  author: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
 });
 
-export default model("Comment", schema);
+export default model<Comment & Document<any>>("Comment", schema);

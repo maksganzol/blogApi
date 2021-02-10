@@ -8,6 +8,11 @@ const schema = new Schema({
   content: {
     type: String,
   },
+  author: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
 });
 
-export default model("Post", schema);
+export default model<Post & Document<any>>("Post", schema);

@@ -3,14 +3,18 @@ import mongoose from "mongoose";
 import comments from "./routes/comments";
 import posts from "./routes/posts";
 import config from "./config";
+import bearerToken from "express-bearer-token";
+import auth from "./routes/auth";
+import Post from "./models/Post";
 
 const { port, mongoUrl } = config;
 
 const app = express();
-
 app
   .use(express.json())
   .use(express.urlencoded({ extended: true }))
+  .use(bearerToken())
+  .use(auth)
   .use(comments)
   .use(posts);
 
