@@ -20,8 +20,9 @@ const commentChilds = childsOf("Comment");
 
 const validateParent = async (
   parentId: string,
-  parentType: Comment["parentType"]
+  parentType: string
 ): Promise<boolean> => {
+  if (!(parentType === "Comment" || parentType === "Post")) return false;
   const model = parentType === "Comment" ? CommentModel : PostModel;
   return Boolean(isValidId(parentId) && (await model.findById(parentId)));
 };
