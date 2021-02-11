@@ -61,15 +61,7 @@ const read: PostRequestHandler = async (req, res) => {
 };
 
 const update: PostRequestHandler = async ({ params, body }, res) => {
-  const { title, content } = body;
-
-  await PostModel.updateOne(
-    { _id: params.id },
-    {
-      title,
-      content,
-    }
-  );
+  await PostModel.updateOne({ _id: params.id }, body);
 
   const updatedPostDoc = await PostModel.findById(params.id);
   if (!updatedPostDoc)

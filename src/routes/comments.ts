@@ -78,6 +78,10 @@ const read: CommentRequestHandler = async (req, res) => {
 
 const update: CommentRequestHandler = async ({ params, body }, res) => {
   const { content } = body;
+  if (!content)
+    return res
+      .status(400)
+      .json({ message: FailureResponseMessage.MISSING_PARAMS });
 
   await CommentModel.updateOne({ _id: params.id }, { content });
 
