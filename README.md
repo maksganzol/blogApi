@@ -1,50 +1,57 @@
-Blog api
+# Blog api
 
-- Posts:
+## Authorization
 
-  - Create post
+- Test account:
 
-    - `POST /posts`
-    - body: `{content, title}`
+  - usrname: `alan_norton`
+  - password: `password`
+  - token `YWxhbl9ub3J0b246cGFzc3dvcmQ=`
 
-  - Get post info
+- Type: `Authorization: Bearer {token}` (token - {username}:{password} in base64)
 
-    - `GET /posts/{id}`
+- Sign up:
+  - `POST /signup`
+  - body `{username, password}`
 
-  - Update post
+## Posts:
 
-    - `PUT /posts`
-    - body `{content, title}`
+- Create post
 
-  - Delete post
+  - `POST /posts`
+  - body: `{content, title}`
 
-    - `DELETE /posts/{id}`
+- Get post info
 
-  - Posts list
-    - `GET /posts?page=0`
+  - `GET /posts/{id}`
 
-- Comments:
+- Update post
 
-  - Create post
+  - `PUT /posts`
+  - body `{content, title}`
 
-    - `POST /comments`
-    - body: `{content, parent, parentType}` (parentType: `Post` | `Comment`)
+- Delete post
 
-  - Get post info
+  - `DELETE /posts/{id}`
 
-    - `GET /comments/{id}`
+- Posts list
+  - `GET /posts?page=0`
 
-  - Update post
+## Comments:
 
-    - `PUT /comments`
-    - body `{content}`
+- Create post
 
-  - Delete post
-    - `DELETE /comments/{id}`
+  - `POST /comments`
+  - body: `{content, parent, parentType}` (parentType: `Post` | `Comment`)
 
-- Authorization
-  - Type: `Bearer {token}`
-    - token - {username}:{password} in base64
-  - Sign up:
-    - `POST /signup`
-    - body `{username, password}`
+- Get post info
+
+  - `GET /comments/{id}`
+
+- Update post
+
+  - `PUT /comments`
+  - body `{content}`
+
+- Delete post
+  - `DELETE /comments/{id}`

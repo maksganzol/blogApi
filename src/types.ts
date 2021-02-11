@@ -3,13 +3,13 @@ import type { RequestHandler } from "express";
 export type Post = {
   title: string;
   content: string;
-  author: string;
+  author: any;
   id?: string;
 };
 
 export type Comment = {
   id?: string;
-  author: string;
+  author: any;
   content: string;
   parent: string;
   parentType: "Comment" | "Post";

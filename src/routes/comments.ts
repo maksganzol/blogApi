@@ -48,7 +48,7 @@ const create: CommentRequestHandler = async (req, res) => {
   });
 
   const comment = await (await commentModel.save())
-    .populate("author", "username")
+    .populate("author", "username -_id")
     .execPopulate()
     .then(parseCommentDocument);
 
@@ -64,7 +64,7 @@ const read: CommentRequestHandler = async (req, res) => {
     return res.status(404).json({ message: FailureResponseMessage.NOT_FOUND });
 
   const comment = await commentDoc
-    .populate("author", "username")
+    .populate("author", "username -_id")
     .execPopulate()
     .then(parseCommentDocument);
 

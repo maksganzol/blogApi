@@ -43,7 +43,7 @@ export const authentication: RequestHandler = async (req: any, res, next) => {
 
 export const parseCommentDocument = (doc: Comment & Document<any>): Comment => {
   const { _id, content, parent, parentType, author } = doc;
-  return { id: _id, content, parent, parentType, author };
+  return { id: _id, content, parent, parentType, author: author.username };
 };
 
 export const childsOf = (parentType: "Comment" | "Post") => async (
@@ -51,7 +51,9 @@ export const childsOf = (parentType: "Comment" | "Post") => async (
 ): Promise<Comment[]> => {
   const childs = await CommentModel.find({ parent: parrentId, parentType });
   const populated = await Promise.all(
-    childs.map((child) => child.populate("author", "username").execPopulate())
+    childs.map((child) =>
+      child.populate("author", "username -_id").execPopulate()
+    )
   );
   populated.map(async (p) => ({
     ...p,

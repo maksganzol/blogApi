@@ -20,7 +20,7 @@ const postChilds = childsOf("Post");
 
 const parsePostDocument = (doc: Post & Document<any>): Post => {
   const { title, content, _id, author } = doc;
-  return { title, content, id: _id, author };
+  return { title, content, id: _id, author: author.username };
 };
 
 const create: PostRequestHandler = async (req, res) => {
@@ -37,7 +37,7 @@ const create: PostRequestHandler = async (req, res) => {
   });
   const doc = await post
     .save()
-    .then((p) => p.populate("author", "username").execPopulate());
+    .then((p) => p.populate("author", "username -_id").execPopulate());
 
   return res.json({
     ...parsePostDocument(doc),
@@ -51,7 +51,7 @@ const read: PostRequestHandler = async (req, res) => {
     return res.status(404).json({ message: FailureResponseMessage.NOT_FOUND });
 
   const post = await postDoc
-    .populate("author", "username")
+    .populate("author", "username -_id")
     .execPopulate()
     .then(parsePostDocument);
 
